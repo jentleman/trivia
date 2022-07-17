@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+        <script>
+
+            function check_answer1(event)
+            {
+                const triggerObject = event.srcElement;
+                /*disable buttons after user's choice*/
+                for(var child of triggerObject.parentNode.children)
+                {
+                    child.setAttribute('disabled', '');
+                }
+                 /*create paragraph for answer*/
+                create_answer_node(triggerObject, 1);
+                const answer = document.getElementById('answer1')
+                 /*check if answer is correct*/
+                if (triggerObject.innerHTML == 'Tavriya Simferopol')
+                {
+                    /*change button style*/
+                    triggerObject.setAttribute('class', 'r_answer');
+                    /*show answer*/
+                    answer.setAttribute('class', 'right');
+                    answer.innerHTML ='Correct';
+                }
+                /*if answer is incorrect*/
+                else
+                {
+                    /*change button style*/
+                    triggerObject.setAttribute('class', 'w_answer');
+                    /*show answer*/
+                    answer.setAttribute('class', 'wrong');
+                    answer.innerHTML ='Incorrect';
+                }
+            }
+            /*Add paragraph*/
+            function create_answer_node(triggerObject, question_number)
+            {
+                const node = document.createElement('p')
+                node.id = 'answer' + question_number;
+                triggerObject.parentNode.insertBefore(node, triggerObject.parentNode.children[3]);
+            }
+
+            function check_answer2(event)
+            {
+                const triggerObject = event.srcElement;
+                /*disable button and input field after user's answer*/
+                triggerObject.setAttribute('disabled', '');
+                const answer_field = document.getElementById("input_field");
+                answer_field.setAttribute('disabled', '');
+                /*create paragraph for answer*/
+                create_answer_node(triggerObject, 2);
+                const answer = document.getElementById('answer2');
+                /*check answer*/
+                if (parseInt(answer_field.value) == 1)
+                {
+                    /*change style if answer is correct*/
+                    answer.setAttribute('class', 'right');
+                    answer.innerHTML ='Correct';
+                    answer_field.setAttribute('class', 'r_answer');
+                }
+                else
+                {
+                      /*change style if answer is incorrect*/
+                    answer.setAttribute('class', 'wrong');
+                    answer.innerHTML ='Incorrect';
+                    answer_field.setAttribute('class', 'w_answer');
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <!-- TODO: Add multiple choice question here -->
+                <h3>Which club have won the fist Ukrainian football championship?</h3>
+                <button type="button" onClick="check_answer1(event);">Shakhtar Donetsk</button>
+                <button type="button" onClick="check_answer1(event);">Dynamo Kyjiw</button>
+                <button type="button" onClick="check_answer1(event);">Dnipro Dnipropetrovs'k</button>
+                <button type="button" onClick="check_answer1(event);">Tavriya Simferopol</button>
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <!-- TODO: Add free response question here -->
+                <h3>How many goals did the winner of the Ukrainian football championship score in final match?</h3>
+                <input type="text" id="input_field">
+                <button type="button" onClick="check_answer2(event)">Confirm</button>
+            </div>
+        </div>
+    </body>
+</html>
